@@ -1,14 +1,19 @@
-## Finitewave model template (replace with the model name)
+## Aliev-Panfilov Finitewave model template
 
-Add model description here and fill the sections below.
+The Aliev-Panfilov model is a mathematical representation of cardiac tissue dynamics, capturing the essential features of wave propagation in excitable media. This model is particularly useful for studying the behavior of cardiac arrhythmias and other phenomena related to heart rhythms.
 
 ### Reference
-Paper, Authors, DOI.
+Aliev, R. R., & Panfilov, A. V. (1996). A simple two-variable model of cardiac
+  excitation. Chaos, Solitons & Fractals, 7(3), 293-301.
 
-### How to use (quickstart)
+DOI: https://doi.org/10.1016/0960-0779(95)00089-5
+
+### How to use
 ```bash
-python -m example/model_example
+python -m examples.aliev_panfilov_example
 ```
+
+This will initiate a simulation using the Aliev-Panfilov model and display the results.
 
 ### How to test
 ```bash
@@ -18,16 +23,16 @@ python -m test
 ### Repository structure
 ```text
 .
-├── model_template/                  # equations package (ops.py)
+├── aliev_panfilov/                  # Aliev-Panfilov model equations package (ops.py)
 │   ├── __init__.py
-│   └── ops.py                       # fill with the model equations (pure functions)
+│   └── ops.py                       
 ├── implementation/                  # 0D model implementation
 │   ├── __init__.py
-│   └── model_0d.py
+│   └── aliev_panfilov_0d.py
 ├── example/
-│   └── model_example.py             # minimal script to run a short trace
+│   └── aliev_panfilov_example.py    # minimal script to run a short trace
 ├── tests/
-│   └── test.py                      # smoke test; extend with reproducibility checks
+│   └── aliev_panfilov_test.py       # smoke test
 ├── .gitignore
 ├── LICENSE                          # MIT
 ├── pyproject.toml                   # placeholders to replace
@@ -35,18 +40,15 @@ python -m test
 ```
 
 ### Variables
-Model state variables: description, units and ranges (optional)
-- `u` — ...
+Model state variables:
+- `u` — Transmembrane potential.
+- `v` - Recovery variable.
 
 ### Parameters
-Parameters and their defualt values
-- `par` - ...
+Parameters and their defualt values:
+- `a`    - Excitability threshold.                # Default: 0.1
+- `k`    - Strength of the nonlinear source term. # Default: 8.0
+- `eps`  - Baseline recovery rate.                # Default: 0.01
+- `mu_1` - Recovery scaling parameter.            # Default: 0.2
+- `mu_2` - Offset parameter for recovery rate.    # Default: 0.3
 
-### Model Contributor TODO (template repository only)
-
-In pyproject.toml, replace "model_template" with the actual model id. 
-It must match the name of the directory where ops.py is located.
-```toml
-[project.entry-points."finitewave.models"]
-model_template = "finitewave_models.model_template"
-```

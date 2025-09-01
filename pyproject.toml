@@ -3,11 +3,9 @@ requires = ["hatchling>=1.21.0"]
 build-backend = "hatchling.build"
 
 [project]
-# Replace "model_template" with the actual model's ID. 
-name = "finitewave-model-model_template"
+name = "aliev-panfilov-finitewave-model"
 version = "0.1.0"
-# Replace with the model's description.
-description = "Readable cardiac model."
+description = "Aliev-Panfilov model implementation."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -22,10 +20,8 @@ classifiers = [
 
 dependencies = []
 
-# Important: entry point, which is used by Finitewave
-# Replace "model_template" with the actual model's ID. 
 [project.entry-points."finitewave.models"]
-model_template = "finitewave_models.model_template"
+model_template = "finitewave_models.aliev_panfilov"
 
 [tool.hatch.build.targets.wheel]
 packages = ["finitewave_models"]
