@@ -2,6 +2,8 @@
 
 The Aliev-Panfilov model is a mathematical representation of cardiac tissue dynamics, capturing the essential features of wave propagation in excitable media. This model is particularly useful for studying the behavior of cardiac arrhythmias and other phenomena related to heart rhythms.
 
+This model implementation can be used separately from the Finitewave, allowing for standalone simulations and testing of the Aliev-Panfilov dynamics without the need for the entire framework.
+
 ### Reference
 Aliev, R. R., & Panfilov, A. V. (1996). A simple two-variable model of cardiac
   excitation. Chaos, Solitons & Fractals, 7(3), 293-301.
@@ -32,10 +34,10 @@ python -m pytest -q
 ├── example/
 │   └── aliev_panfilov_example.py    # minimal script to run a short trace
 ├── tests/
-│   └── aliev_panfilov_test.py       # smoke test
+│   └── aliev_panfilov_test.py       # Aliev-Panfilov model test
 ├── .gitignore
 ├── LICENSE                          # MIT
-├── pyproject.toml                   # placeholders to replace
+├── pyproject.toml                   
 └── README.md                        # this file
 ```
 
