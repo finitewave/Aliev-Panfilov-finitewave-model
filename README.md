@@ -17,7 +17,7 @@ This will initiate a simulation using the Aliev-Panfilov model and display the r
 
 ### How to test
 ```bash
-python -m test
+python -m pytest -q
 ```
 
 ### Repository structure
