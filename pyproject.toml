@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "aliev-panfilov-finitewave-model"
 version = "0.1.0"
-description = "Aliev-Panfilov model implementation."
+description = "Aliev-Panfilov model."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
