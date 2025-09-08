@@ -21,10 +21,10 @@ classifiers = [
 dependencies = []
 
 [project.entry-points."finitewave.models"]
-model_template = "finitewave_models.aliev_panfilov"
+aliev_panfilov = "aliev_panfilov.ops"
 
 [tool.hatch.build.targets.wheel]
-packages = ["finitewave_models"]
+packages = ["aliev_panfilov"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
