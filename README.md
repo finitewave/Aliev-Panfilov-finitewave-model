@@ -43,14 +43,14 @@ python -m pytest -q
 
 ### Variables
 Model state variables:
-- `u` — Transmembrane potential.
+- `u` - Transmembrane potential.
 - `v` - Recovery variable.
 
 ### Parameters
 Parameters and their defualt values:
-- `a`    - Excitability threshold.                # Default: 0.1
-- `k`    - Strength of the nonlinear source term. # Default: 8.0
-- `eps`  - Baseline recovery rate.                # Default: 0.01
-- `mu_1` - Recovery scaling parameter.            # Default: 0.2
-- `mu_2` - Offset parameter for recovery rate.    # Default: 0.3
+- `a    = 0.1` - Excitability threshold.
+- `k    = 8.0` - Strength of the nonlinear source term.
+- `eps  = 0.01`- Baseline recovery rate.
+- `mu_1 = 0.2` - Recovery scaling parameter.
+- `mu_2 = 0.3` - Offset parameter for recovery rate.
 
