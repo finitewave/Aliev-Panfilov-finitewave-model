@@ -66,8 +66,8 @@ class AlievPanfilov0D:
 
         stim_current = sum(stim.stim(t=self.dt*i) for stim in self.stimulations)
 
-        self.variables["u"] = u_old + self.dt * (du + stim_current)
         self.variables["v"] = v_old + self.dt * dv
+        self.variables["u"] = u_old + self.dt * (du + stim_current)
 
     def run(self, t_max: float):
         """
