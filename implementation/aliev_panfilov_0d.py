@@ -57,18 +57,17 @@ class AlievPanfilov0D:
         i : int
             Current time step index.
         """
-        self.variables["v"] += self.dt*ops.calc_dv(self.variables["v"],
-                                                   self.variables["u"], 
-                                                   self.parameters["a"], 
-                                                   self.parameters["k"], 
-                                                   self.parameters["eps"], 
-                                                   self.parameters["mu1"], 
-                                                   self.parameters["mu2"])
-        self.variables["u"] += self.dt*(ops.calc_rhs(self.variables["u"],
-                                                     self.variables["v"], 
-                                                     self.parameters["a"], 
-                                                     self.parameters["k"])
-                                        + sum(stim.stim(t=self.dt*i) for stim in self.stimulations))
+        u_old = self.variables["u"]
+        v_old = self.variables["v"]
+
+        du = ops.calc_rhs(u_old, v_old, self.parameters["a"], self.parameters["k"])
+        dv = ops.calc_dv(v_old, u_old, self.parameters["a"], self.parameters["k"],
+                        self.parameters["eps"], self.parameters["mu1"], self.parameters["mu2"])
+
+        stim_current = sum(stim.stim(t=self.dt*i) for stim in self.stimulations)
+
+        self.variables["u"] = u_old + self.dt * (du + stim_current)
+        self.variables["v"] = v_old + self.dt * dv
 
     def run(self, t_max: float):
         """
