@@ -47,6 +47,7 @@ class AlievPanfilov0D:
         self.variables = ops.get_variables()
         self.parameters = ops.get_parameters()
         self.history = {s: [] for s in self.variables}
+        self.stim_curr_history = []
 
     def step(self, i: int):
         """
@@ -57,18 +58,12 @@ class AlievPanfilov0D:
         i : int
             Current time step index.
         """
-        self.variables["v"] += self.dt*ops.calc_dv(self.variables["v"],
-                                                   self.variables["u"], 
-                                                   self.parameters["a"], 
-                                                   self.parameters["k"], 
-                                                   self.parameters["eps"], 
-                                                   self.parameters["mu1"], 
-                                                   self.parameters["mu2"])
-        self.variables["u"] += self.dt*(ops.calc_rhs(self.variables["u"],
-                                                     self.variables["v"], 
-                                                     self.parameters["a"], 
-                                                     self.parameters["k"])
-                                        + sum(stim.stim(t=self.dt*i) for stim in self.stimulations))
+        rhs, self.variables["v"] = ops.step(self.dt, self.variables["u"], self.variables["v"],
+                                            self.parameters["a"], self.parameters["k"], self.parameters["eps"],
+                                            self.parameters["mu1"], self.parameters["mu2"])
+        stim_curr = self.dt * sum(stim.stim(t=self.dt*i) for stim in self.stimulations)
+        self.stim_curr_history.append(stim_curr)
+        self.variables["u"] += self.dt * rhs + stim_curr
 
     def run(self, t_max: float):
         """
