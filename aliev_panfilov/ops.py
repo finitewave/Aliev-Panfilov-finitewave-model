@@ -21,7 +21,7 @@ __all__ = (
     "get_parameters",
     "calc_rhs",
     "calc_dv",
-    "step",
+    "ionic_step",
 )
 
 
@@ -39,7 +39,7 @@ def get_parameters() -> dict[str, float]:
     return {"a": 0.1, "k": 8.0, "eps": 0.01, "mu1": 0.2, "mu2": 0.3}
 
 
-def step(dt, u, v, a, k, eps, mu1, mu2):
+def ionic_step(dt, u, v, a, k, eps, mu1, mu2):
     """
     Computes the next time step for the state variables u and v using the Aliev–Panfilov model equations.
 
@@ -64,7 +64,7 @@ def step(dt, u, v, a, k, eps, mu1, mu2):
 
     Returns
     -------
-    rhs_new : float
+    rhs : float
         The computed right-hand side of the differential equation for `u`.
     v_new : float
         Updated value of the recovery variable `v`.
@@ -74,9 +74,9 @@ def step(dt, u, v, a, k, eps, mu1, mu2):
     - This function should not include operations in return statement.
     - Only one return statement is allowed, and it must return the updated state variables.
     """
-    rhs_new = calc_rhs(u, v, a, k)
+    rhs = calc_rhs(u, v, a, k)
     v_new = v + dt * calc_dv(v, u, a, k, eps, mu1, mu2)
-    return rhs_new, v_new
+    return rhs, v_new
 
 
 def calc_rhs(u, v, a, k) -> float:
