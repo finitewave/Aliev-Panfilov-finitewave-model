@@ -14,7 +14,7 @@ model.run(t_max=t_max)
 
 time = np.arange(0, t_max, model.dt)
 plt.plot(time, model.history['u'])
-plt.plot(time, model.stim_curr_history, label='Stimulus Current', linestyle='--')
+plt.plot(time, model.stim_history, label='Stimulus Current', linestyle='--')
 plt.xlabel('Time (s)')
 plt.ylabel('Membrane Potential (u)')
 plt.title('0D Aliev-Panfilov Simulation')
