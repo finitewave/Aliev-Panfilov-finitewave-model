@@ -17,6 +17,8 @@ python -m examples.aliev_panfilov_example
 
 This will initiate a simulation using the Aliev-Panfilov model and display the results.
 
+![Alt text](aliev_panfilov_ap.png)
+
 ### How to test
 ```bash
 python -m pytest -q

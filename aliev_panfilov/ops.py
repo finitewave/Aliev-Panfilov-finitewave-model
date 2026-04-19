@@ -21,6 +21,7 @@ __all__ = (
     "get_parameters",
     "calc_rhs",
     "calc_dv",
+    "ionic_step",
 )
 
 
@@ -36,6 +37,46 @@ def get_parameters() -> dict[str, float]:
     Returns default parameter values for the model.
     """
     return {"a": 0.1, "k": 8.0, "eps": 0.01, "mu1": 0.2, "mu2": 0.3}
+
+
+def ionic_step(dt, u, v, a, k, eps, mu1, mu2):
+    """
+    Computes the next time step for the state variables u and v using the Aliev–Panfilov model equations.
+
+    Parameters
+    ----------
+    dt : float
+        Time step for integration.
+    u : float
+        Current value of the transmembrane potential.
+    v : float
+        Current value of the recovery variable.
+    a : float
+        Excitability threshold.
+    k : float
+        Strength of the nonlinear source term.
+    eps : float
+        Baseline recovery rate.
+    mu1 : float
+        Recovery scaling parameter.
+    mu2 : float
+        Offset parameter for recovery rate.
+
+    Returns
+    -------
+    rhs : float
+        The computed right-hand side of the differential equation for `u`.
+    v_new : float
+        Updated value of the recovery variable `v`.
+
+    Notes
+    -----
+    - This function should not include operations in return statement.
+    - Only one return statement is allowed, and it must return the updated state variables.
+    """
+    rhs = calc_rhs(u, v, a, k)
+    v_new = v + dt * calc_dv(v, u, a, k, eps, mu1, mu2)
+    return rhs, v_new
 
 
 def calc_rhs(u, v, a, k) -> float:
