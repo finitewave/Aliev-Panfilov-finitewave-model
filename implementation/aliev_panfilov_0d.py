@@ -59,12 +59,17 @@ class AlievPanfilov0D:
         i : int
             Current time step index.
         """
-        rhs, self.variables["v"] = ops.ionic_step(self.dt, self.variables["u"], self.variables["v"],
-                                            self.parameters["a"], self.parameters["k"], self.parameters["eps"],
-                                            self.parameters["mu1"], self.parameters["mu2"])
-        stim_curr = self.dt * sum(stim.stim(t=self.dt*i) for stim in self.stimulations)
-        self.stim_history.append(stim_curr)
-        self.variables["u"] += self.dt * rhs + stim_curr
+        u_old = self.variables["u"]
+        v_old = self.variables["v"]
+
+        du = ops.calc_rhs(u_old, v_old, self.parameters["a"], self.parameters["k"])
+        dv = ops.calc_dv(v_old, u_old, self.parameters["a"], self.parameters["k"],
+                        self.parameters["eps"], self.parameters["mu1"], self.parameters["mu2"])
+
+        stim_current = sum(stim.stim(t=self.dt*i) for stim in self.stimulations)
+
+        self.variables["v"] = v_old + self.dt * dv
+        self.variables["u"] = u_old + self.dt * (du + stim_current)
 
     def run(self, t_max: float):
         """
