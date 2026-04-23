@@ -17,12 +17,22 @@ DOI: https://doi.org/10.1016/0960-0779(95)00089-5
 """
 
 __all__ = (
+    "get_diffusion_coefficient",
     "get_variables",
     "get_parameters",
     "calc_rhs",
     "calc_dv",
     "ionic_step",
 )
+
+
+def get_diffusion_coefficient() -> float:
+    """
+    Returns the diffusion coefficient for the spatial coupling in the model.
+    This value is typically used in the spatial discretization of the model
+    equations when simulating wave propagation in cardiac tissue.
+    """
+    return {"D_model": 1.0}
 
 
 def get_variables() -> dict[str, float]:
