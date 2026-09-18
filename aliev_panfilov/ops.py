@@ -20,6 +20,7 @@ __all__ = (
     "get_diffusion_coefficient",
     "get_variables",
     "get_parameters",
+    "ionic_step",
     "calc_rhs",
     "calc_dv",
     "ionic_step",
